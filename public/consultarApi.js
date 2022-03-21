@@ -1,8 +1,8 @@
 const consultarApi = async(accion, sueldo, ahorro) => {
     try {
-        const resp  = await fetch(`http://localhost:8080/rest/msdxc/${ accion }?sueldo=${ sueldo }&ahorro=${ ahorro }/`);
+        const resp  = await fetch(`http://localhost:8081/rest/msdxc/${ accion }?sueldo=${ sueldo }&ahorro=${ ahorro }`);
         const data  = await resp.json(); 
-        //console.log(data)
+        console.log(data)
         return data;
 
 
@@ -11,15 +11,24 @@ const consultarApi = async(accion, sueldo, ahorro) => {
     }  
 }
 
-const getValue = (boton) =>{
+const getValue = async (boton) =>{
 
     var input_sueldo = document.getElementById("input_sueldo").value;
     var input_ahorro = document.getElementById("input_ahorro").value;
     
-    //var result = consultarApi(boton, input_sueldo, input_ahorro);
+    var result = await consultarApi(boton, input_sueldo, input_ahorro);
     
-    
-    document.getElementById("resultado").innerHTML = `input_sueldo: ${input_sueldo} input_ahorro: ${input_ahorro} boton: ${boton}`; 
+    switch(boton){
+        case 'impuesto':
+            document.getElementById("resultado").innerHTML = `Impuesto: ${result.impuesto}`;
+            break;
+        case 'saldo':
+            document.getElementById("resultado").innerHTML = `Saldo: ${result.saldo}`;
+            break;
+        case 'dxc':
+            document.getElementById("resultado").innerHTML = `DXC: ${result.dxc}`;
+            break;
+    }
 }
 
 
