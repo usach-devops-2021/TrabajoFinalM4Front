@@ -1,7 +1,6 @@
-
 const consultarApi = async(accion, sueldo, ahorro) => {
     try {
-        const resp   = await fetch(`http://localhost:8080/rest/msdxc/${ accion }?sueldo=${ sueldo }&ahorro=${ ahorro }/`);
+        const resp  = await fetch(`http://localhost:8080/rest/msdxc/${ accion }?sueldo=${ sueldo }&ahorro=${ ahorro }/`);
         const data  = await resp.json(); 
         //console.log(data)
         return data;
